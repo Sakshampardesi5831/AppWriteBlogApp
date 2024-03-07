@@ -1,12 +1,43 @@
-import  { Fragment } from 'react'
-
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import authService from "./appwrite/auth";
+import { login, logout } from "./store/authSlice";
+import { Header, Footer } from "./components";
+// import { Outlet } from "react-router-dom";
 const App = () => {
-  console.log(import.meta.env.VITE_APP_APPWRITE_URL)
-  return (
-    <Fragment>
-      <h1>Hello World</h1>
-    </Fragment>
-  )
-}
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    authService
+      .getCurrentUser()
+      .then((userData) => {
+        if (userData) {
+          dispatch(login({ userData }));
+        } else {
+          dispatch(logout());
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
-export default App
+  return !loading ? (
+    <Fragment>
+      <div className="min-h-screen flex flex-wrap content-between bg-gray-400">
+        <div className="w-full block">
+          <Header />
+          <main>
+            
+            {/* <Outlet /> */}
+          </main>
+          <Footer />
+        </div>
+      </div>
+    </Fragment>
+  ) : (
+    <Fragment></Fragment>
+  );
+};
+
+export default App;
