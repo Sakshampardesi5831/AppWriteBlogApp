@@ -4,14 +4,13 @@ import databaseService from "../appwrite/configDb";
 import { PostCard, Container } from "../components";
 const AllPost = () => {
   const [posts, setPosts] = useState([]);
-
-  databaseService.getPosts([]).then((posts) => {
-    if (posts) {
-      setPosts(posts.documents);
-    }
-  });
-
-  useEffect(() => {});
+  useEffect(() => {
+    databaseService.getPosts().then((posts) => {
+      if (posts) {
+        setPosts(posts.documents);
+      }
+    });
+  }, []);
 
   return (
     <Fragment>

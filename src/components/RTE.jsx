@@ -2,7 +2,13 @@
 import { Fragment } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Controller } from "react-hook-form";
-export default function RTE({ name, control, label, defaultValue = "" }) {
+export default function RTE({
+  name,
+  control,
+  label,
+  defaultValue = "",
+  apiKey = "",
+}) {
   return (
     <Fragment>
       <div className="w-full">
@@ -12,6 +18,7 @@ export default function RTE({ name, control, label, defaultValue = "" }) {
           control={control}
           render={({ field: { onChange } }) => (
             <Editor
+              apiKey={apiKey}
               initialValue={defaultValue}
               init={{
                 initialValue: defaultValue,

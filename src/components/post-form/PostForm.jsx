@@ -6,6 +6,7 @@ import { RTE, Button, Input, Select } from "../";
 import databaseAppWriteService from "../../appwrite/configDb";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import config from '../../config/config'
 function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
@@ -17,7 +18,7 @@ function PostForm({ post }) {
       },
     });
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.user.userData);
+  const userData = useSelector((state) => state.authReducer.userData);
 
   const submit = async (data) => {
     let file = null;
@@ -97,6 +98,7 @@ function PostForm({ post }) {
             }}
           />
           <RTE
+            apiKey={config.tinyMceApiKey}
             label="Content :"
             name="content"
             control={control}

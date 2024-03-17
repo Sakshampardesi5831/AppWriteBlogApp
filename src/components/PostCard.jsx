@@ -3,7 +3,8 @@ import { Fragment } from "react";
 import appWriteService from "../appwrite/configDb";
 import { Link } from "react-router-dom";
 
-const PostCard = ({ $id, title, featuredImage }) => {
+const PostCard = (post) => {
+  const { $id, title, featuredImage } = post.post;
   return (
     <Fragment>
       <Link to={`/post/${$id}`}>
