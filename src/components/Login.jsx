@@ -29,7 +29,7 @@ const Login = () => {
 
   return (
     <Fragment>
-      <div className="w-full items-center justify-center flex">
+      <div className="w-full h-full items-center justify-center flex">
         <div
           className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
         >
